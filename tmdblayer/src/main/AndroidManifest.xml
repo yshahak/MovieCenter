@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.thedroidboy.www.tmdblayer">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <provider
+            android:name=".provider.MovieProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false" />
+
+        <service
+            android:name=".PullPopularListService"
+            android:exported="false"/>
+        <service android:name=".QueryForMovieService"
+            android:exported="false"/>
+    </application>
+
+</manifest>

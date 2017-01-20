@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TMDB Layer</string>
+    <string name="content_authority">com.thedroidboy.www.tmdblayer.provider</string>
+</resources>
