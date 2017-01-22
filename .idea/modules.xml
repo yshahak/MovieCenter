@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MovieCenter.iml" filepath="$PROJECT_DIR$/MovieCenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MovieCenter.iml" filepath="$PROJECT_DIR$/MovieCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tmdblayer/tmdblayer.iml" filepath="$PROJECT_DIR$/tmdblayer/tmdblayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/tmdblayer/tmdblayer.iml" filepath="$PROJECT_DIR$/tmdblayer/tmdblayer.iml" />
     </modules>
   </component>

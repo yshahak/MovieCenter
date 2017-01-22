@@ -11,15 +11,16 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.thedroidboy.www.tmdblayer.MovieStoreManager;
+import com.thedroidboy.www.tmdblayer.ServerHelper;
 import com.thedroidboy.www.tmdblayer.provider.MoviesContract;
 import com.thedroidboy.www.tmdblayer.provider.MoviesDbHelper;
-import com.thedroidboy.www.tmdblayer.provider.TestProviderUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.thedroidboy.www.tmdblayer.MovieStoreManager.insertListToProvider;
+import static com.thedroidboy.www.tmdblayer.ServerHelper.MOVIE_POPULAR;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -35,13 +36,19 @@ public class TestMovieManager {
     public void testDefaultList() {
         Context mContext = InstrumentationRegistry.getTargetContext();
         mContext.deleteDatabase(MoviesDbHelper.DATABASE_NAME);
+        String json = ServerHelper.getDataFromServer(ServerHelper.getPopularListUrl());
+        ContentValues[] values = ServerHelper.convertJsonToMoviesList(mContext, json, MOVIE_POPULAR);
+        if (values != null && values.length > 0) {
+            insertListToProvider(mContext, values);
+            Cursor cursor = mContext.getContentResolver().query( MoviesContract.MoviesEntry.CONTENT_URI,
+                    null,
+                    MoviesContract.MoviesEntry.COLUMN_MOVIE_LIST + "=?",
+                    new String[]{MOVIE_POPULAR},
+                    null);
+            assertTrue(cursor.moveToFirst());
+            cursor.close();
+        }
 
-        Cursor cursor = MovieStoreManager.getDefultMovieList(mContext);
-        assertFalse(cursor.moveToFirst());
-        ContentValues[] contentValues = TestProviderUtils.getHardCodeMovieArray();
-        MovieStoreManager.insertListToProvider(mContext, contentValues);
-        cursor = MovieStoreManager.getDefultMovieList(mContext);
-        assertTrue(cursor.moveToFirst());
     }
 
     @Test
