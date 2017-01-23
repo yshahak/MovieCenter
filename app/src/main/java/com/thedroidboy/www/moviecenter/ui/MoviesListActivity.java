@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -192,7 +193,10 @@ public class MoviesListActivity extends AppCompatActivity implements
                             errorCont++;
                             if (errorCont >= 3){ //sometimes the server block poster display
                                 errorCont = 0;
-                                getSupportLoaderManager().restartLoader(CODE_POPULAR_LIST, null, MoviesListActivity.this);
+                                Toast.makeText(MoviesListActivity.this, "The is a server connection error", Toast.LENGTH_LONG).show();
+                                Log.d("TAG", "Server error");
+
+//                                getSupportLoaderManager().restartLoader(CODE_POPULAR_LIST, null, MoviesListActivity.this);
                             }
                         }
                     });

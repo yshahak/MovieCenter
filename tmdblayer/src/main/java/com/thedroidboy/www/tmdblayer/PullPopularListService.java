@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.ResultReceiver;
-import android.util.Log;
 
 import static com.thedroidboy.www.tmdblayer.MovieStoreManager.CODE_POPULAR_LIST;
 import static com.thedroidboy.www.tmdblayer.MovieStoreManager.EXTRA_LISTENER;
@@ -32,11 +31,9 @@ public class PullPopularListService extends IntentService {
         ContentValues[] values = ServerHelper.convertJsonToMoviesList(this, json, MOVIE_POPULAR);
         if (values != null && values.length > 0) {
             insertListToProvider(this, values);
-            if (callback != null) {
-                callback.send(CODE_POPULAR_LIST, null);
-            }
-        } else {
-            Log.d("TAG", "no new data found");
+        }
+        if (callback != null) {
+            callback.send(CODE_POPULAR_LIST, null);
         }
     }
 
